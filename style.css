@@ -265,3 +265,9 @@ footer {
     cursor: pointer;
     margin-top: 10px;
 }
+
+.post-date {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+}
