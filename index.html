@@ -32,7 +32,13 @@
 
     <div class="post-input-container">
         <textarea id="postInput" placeholder="O que você está pensando?" rows="10" cols="30"></textarea>
-        <button id="publishButton">Publicar</button>
+        <div class="post-buttons">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            <button id="uploadImageButton">
+                <img src="images/images icon.png" alt="Inserir Imagem" style="width: 24px; height: 24px;">
+            </button>
+            <button id="publishButton">Publicar</button>
+        </div>
     </div>
 
     <main>
