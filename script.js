@@ -5,6 +5,10 @@ const closeFullscreen = document.getElementById('closeFullscreen');
 const postInput = document.getElementById('postInput');
 const publishButton = document.getElementById('publishButton');
 const feed = document.querySelector('.feed');
+const uploadImageButton = document.getElementById('uploadImageButton');
+const imageUpload = document.getElementById('imageUpload');
+
+let uploadedImage = null;
 
 header.addEventListener('click', () => {
     fullScreenBanner.style.display = 'block';
@@ -16,18 +20,39 @@ closeFullscreen.addEventListener('click', () => {
 
 publishButton.addEventListener('click', () => {
     const postContent = postInput.value;
-    if (postContent.trim() !== '') {
-        addPostToFeed(postContent);
-        postInput.value = ''; 
+    if (postContent.trim() !== '' || uploadedImage) {
+        addPostToFeed(postContent, uploadedImage);
+        postInput.value = '';
+        uploadedImage = null;
     }
 });
 
-function addPostToFeed(postContent) {
+uploadImageButton.addEventListener('click', () => {
+    imageUpload.click();
+});
+
+imageUpload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            uploadedImage = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+function addPostToFeed(postContent, imageSrc) {
     const newPost = document.createElement('article');
     newPost.classList.add('post');
 
     const now = new Date();
     const formattedDate = formatDate(now);
+
+    let imageHtml = '';
+    if (imageSrc) {
+        imageHtml = `<img src="${imageSrc}" alt="Imagem do post" class="post-image">`;
+    }
 
     newPost.innerHTML = `
         <div class="post-header">
@@ -42,9 +67,10 @@ function addPostToFeed(postContent) {
             </div>
         </div>
         <h3>${postContent}</h3>
+        ${imageHtml}
         <p class="post-date">${formattedDate}</p>
     `;
-    feed.insertBefore(newPost, feed.firstChild); 
+    feed.insertBefore(newPost, feed.firstChild);
 }
 
 function formatDate(date) {
