@@ -85,7 +85,7 @@ main {
     width: 20px;
     height: 20px;
     margin-bottom: -20px;
-    margin-left: 3px; 
+    margin-left: 3px;
 }
 
 .profile-at {
@@ -205,7 +205,7 @@ footer {
 .post-verified-icon {
     width: 15px;
     height: 15px;
-    margin-left: 3px; 
+    margin-left: 3px;
 }
 
 #fullScreenPostContent {
@@ -256,14 +256,29 @@ footer {
     box-sizing: border-box;
 }
 
-#publishButton {
-    width: 100%;
+.post-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#uploadImageButton, #publishButton {
     padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
+}
+
+#uploadImageButton {
+    background-color: #eee;
+    color: black;
+}
+
+.post-image {
+    width: 675px;
+    height: 675px;
+    object-fit: contain;
 }
 
 .post-date {
