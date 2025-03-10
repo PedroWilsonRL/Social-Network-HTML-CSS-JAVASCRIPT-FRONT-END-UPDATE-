@@ -25,6 +25,10 @@ publishButton.addEventListener('click', () => {
 function addPostToFeed(postContent) {
     const newPost = document.createElement('article');
     newPost.classList.add('post');
+
+    const now = new Date();
+    const formattedDate = formatDate(now);
+
     newPost.innerHTML = `
         <div class="post-header">
             <img src="images/foto de perfil3.jpg" alt="Foto de perfil" class="post-profile-pic">
@@ -38,6 +42,16 @@ function addPostToFeed(postContent) {
             </div>
         </div>
         <h3>${postContent}</h3>
+        <p class="post-date">${formattedDate}</p>
     `;
     feed.insertBefore(newPost, feed.firstChild); 
+}
+
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
