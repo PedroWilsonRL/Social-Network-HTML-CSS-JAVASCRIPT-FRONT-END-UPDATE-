@@ -54,6 +54,8 @@ function addPostToFeed(postContent, imageSrc) {
         imageHtml = `<img src="${imageSrc}" alt="Imagem do post" class="post-image">`;
     }
 
+    const contentWithHashtags = postContent.replace(/#([\wáàâãéèêíïóôõúüçÁÀÂÃÉÈÊÍÏÓÔÕÚÜÇ]+)/g, '<a href="#$1">#$1</a>');
+
     newPost.innerHTML = `
         <div class="post-header">
             <img src="images/foto de perfil3.jpg" alt="Foto de perfil" class="post-profile-pic">
@@ -66,7 +68,7 @@ function addPostToFeed(postContent, imageSrc) {
                 <p class="post-profile-at">@iampedrowilson</p>
             </div>
         </div>
-        <h3>${postContent}</h3>
+        <h3>${contentWithHashtags}</h3>
         ${imageHtml}
         <p class="post-date">${formattedDate}</p>
     `;
